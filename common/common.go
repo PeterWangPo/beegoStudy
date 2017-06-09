@@ -1,5 +1,10 @@
 package common
 
+import (
+	"math/rand"
+	"time"
+)
+
 //返回提示信息
 func GetMsg(codeNum int, msg string, data ...interface{}) map[string]interface{} {
 	if data == nil {

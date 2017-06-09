@@ -14,7 +14,7 @@ type LoginController struct {
 
 func (c *LoginController) Get() {
 	a := c.GetString("a")
-	c.Data["Website"] = "beego.me111"
+	c.Data["Website"] = beego.VERSION
 	c.Data["Email"] = a
 	c.TplName = "logincontroller/get.tpl"
 }
@@ -27,7 +27,7 @@ func (c *LoginController) Post() {
 }
 
 func (c *MainController) Get() {
-	c.Data["Website"] = "beego.me"
-	c.Data["Email"] = "111@123.com"
+	c.Data["Website"] = beego.VERSION
+	c.Data["Email"] = "122211@123.com"
 	c.TplName = "index.tpl"
 }
