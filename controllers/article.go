@@ -13,6 +13,7 @@ type ArticleController struct {
 	beego.Controller
 }
 
+/**添加一条文章*/
 func (this *ArticleController) Add() {
 	// if !this.isLogin {
 	// 	this.Data["json"] = map[string]interface{}{"code": 0, "message": "请先登陆"}
@@ -54,7 +55,8 @@ func (this *ArticleController) Add() {
 	this.ServeJSON()
 }
 
-func (this *ArticleController) Del() {
+/**删除一条文章*/
+func (this *ArticleController) DelOne() {
 	id, err1 := this.GetInt("id")
 	fmt.Println(id)
 	if err1 != nil {
@@ -71,7 +73,8 @@ func (this *ArticleController) Del() {
 	this.ServeJSON()
 }
 
-func (this *ArticleController) Article() {
+/**获取一篇文章详情**/
+func (this *ArticleController) Detail() {
 	if id, err1 := this.GetInt("id"); err1 != nil {
 		fmt.Println(err1)
 		this.Data["json"] = GetMsg(0, "参数错误")
@@ -82,14 +85,5 @@ func (this *ArticleController) Article() {
 			this.Data["json"] = GetMsg(1, "获取成功", art)
 		}
 	}
-	this.ServeJSON()
-}
-
-type SearchArticleController struct {
-	beego.Controller
-}
-
-func (this *SearchArticleController) Get() {
-	this.Data["json"] = map[string]interface{}{"code": 0, "message": "请先登陆"}
 	this.ServeJSON()
 }
