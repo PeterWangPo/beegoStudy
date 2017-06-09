@@ -9,11 +9,11 @@ import (
 	m "webApp/models"
 )
 
-type AddArticleController struct {
+type ArticleController struct {
 	beego.Controller
 }
 
-func (this *AddArticleController) Add() {
+func (this *ArticleController) Add() {
 	// if !this.isLogin {
 	// 	this.Data["json"] = map[string]interface{}{"code": 0, "message": "请先登陆"}
 	// 	this.ServeJSON()
@@ -54,11 +54,7 @@ func (this *AddArticleController) Add() {
 	this.ServeJSON()
 }
 
-type DelArticleController struct {
-	beego.Controller
-}
-
-func (this *DelArticleController) Post() {
+func (this *ArticleController) Del() {
 	id, err1 := this.GetInt("id")
 	fmt.Println(id)
 	if err1 != nil {
@@ -75,11 +71,7 @@ func (this *DelArticleController) Post() {
 	this.ServeJSON()
 }
 
-type GetArticleController struct {
-	beego.Controller
-}
-
-func (this *GetArticleController) Get() {
+func (this *ArticleController) Article() {
 	if id, err1 := this.GetInt("id"); err1 != nil {
 		fmt.Println(err1)
 		this.Data["json"] = GetMsg(0, "参数错误")
