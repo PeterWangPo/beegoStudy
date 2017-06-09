@@ -13,7 +13,7 @@ type AddArticleController struct {
 	beego.Controller
 }
 
-func (this *AddArticleController) Post() {
+func (this *AddArticleController) Add() {
 	// if !this.isLogin {
 	// 	this.Data["json"] = map[string]interface{}{"code": 0, "message": "请先登陆"}
 	// 	this.ServeJSON()
