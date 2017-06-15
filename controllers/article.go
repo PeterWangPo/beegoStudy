@@ -118,3 +118,23 @@ func (this *ArticleController) Detail() {
 	}
 	this.ServeJSON()
 }
+
+/**搜索文章**/
+func (this *ArticleController) QueryArticle() {
+	args := map[string]string{}
+	if id, err := this.GetInt("id"); err == nil {
+		args["id"] = strconv.Itoa(id)
+	}
+	title := this.GetString("title")
+	if title != "" {
+		args["title"] = title
+	}
+	fmt.Println(args)
+	articles, err := m.SearchArticle(args)
+	if err == nil {
+		this.Data["json"] = GetMsg(1, "获取成功", articles)
+	} else {
+		this.Data["json"] = GetMsg(0, "获取失败")
+	}
+	this.ServeJSON()
+}

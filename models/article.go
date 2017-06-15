@@ -4,6 +4,7 @@ import (
 	"github.com/astaxie/beego/orm"
 	// _ "github.com/go-sql-driver/mysql"
 	// "fmt"
+	"strings"
 	"time"
 	//_ "webApp/initial"
 )
@@ -72,9 +73,28 @@ func GetArticle(id int) (Article, error) {
 	return art, err
 }
 
-type QureyArticle struct {
-	sql   string
-	where string
+func SearchArticle(arg map[string]string) ([]Article, error) {
+	o := orm.NewOrm()
+	var art Article
+	var sql = "select * from " + art.TableName()
+	conditions := []string{}
+	for k, v := range arg {
+		if k == "title" {
+			conditions = append(conditions, " title like '%"+v+"%'")
+		} else {
+			conditions = append(conditions, k+" = "+"'"+v+"'")
+		}
+	}
+	if len(conditions) > 0 {
+		sql = sql + " where " + strings.Join(conditions, " and ")
+	}
+	var arts []Article
+	_, err := o.Raw(sql).QueryRows(&arts)
+	if err == nil {
+		return arts, nil
+	} else {
+		return nil, err
+	}
 }
 
 // func SearchArticle(args ...interface{}) (Article, error) {
@@ -84,6 +104,7 @@ type QureyArticle struct {
 // 	o.Using("default")
 // 	//....
 // }
+
 func DelArticle(id int) error {
 	o := orm.NewOrm()
 	o.Using("default")

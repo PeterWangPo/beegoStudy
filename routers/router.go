@@ -12,4 +12,5 @@ func init() {
 	beego.Router("/article/del", &controllers.ArticleController{}, "post:DelOne")
 	beego.Router("/article/delBatch", &controllers.ArticleController{}, "post:DelBatch")
 	beego.Router("/article/detail", &controllers.ArticleController{}, "get:Detail")
+	beego.Router("/article/queryArticle", &controllers.ArticleController{}, "get:QueryArticle")
 }

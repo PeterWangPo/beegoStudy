@@ -10,7 +10,7 @@ func GetMsg(codeNum int, msg string, data ...interface{}) map[string]interface{}
 	if data == nil {
 		return map[string]interface{}{"code": codeNum, "message": msg}
 	} else {
-		return map[string]interface{}{"code": codeNum, "message": msg, "data": data}
+		return map[string]interface{}{"code": codeNum, "message": msg, "data": data[0]}
 	}
 }
 
