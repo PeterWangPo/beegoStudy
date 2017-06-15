@@ -102,7 +102,6 @@ func (this *ArticleController) DelBatch() {
 		this.Data["json"] = GetMsg(1, "成功删除:"+strconv.Itoa(success)+"条 删除失败:"+strconv.Itoa(failed)+"条")
 	}
 	this.ServeJSON()
-	return
 }
 
 /**获取一篇文章详情**/
