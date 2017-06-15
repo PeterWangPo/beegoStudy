@@ -22,9 +22,10 @@ type Article struct {
 	Status   int
 }
 
-func (this *Article) TableName() string {
+var getTableName = func() string {
 	return "article"
 }
+
 func init() {
 	//orm.RegisterDriver("mysql", orm.DRMySQL)
 	//orm.RegisterDataBase("default", "mysql", "root:@/blog?charset=utf8", 30)
@@ -75,8 +76,7 @@ func GetArticle(id int) (Article, error) {
 
 func SearchArticle(arg map[string]string) ([]Article, error) {
 	o := orm.NewOrm()
-	var art Article
-	var sql = "select * from " + art.TableName()
+	var sql = "select * from " + getTableName()
 	conditions := []string{}
 	for k, v := range arg {
 		if k == "title" {

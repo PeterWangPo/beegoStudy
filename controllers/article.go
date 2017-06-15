@@ -94,6 +94,8 @@ func (this *ArticleController) DelBatch() {
 			} else {
 				success++
 			}
+		} else {
+			failed++
 		}
 	}
 	if failed == 0 {
