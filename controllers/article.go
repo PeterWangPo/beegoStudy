@@ -4,7 +4,8 @@ import (
 	"github.com/astaxie/beego"
 	// "github.com/astaxie/beego/utils/pagination"
 	"fmt"
-	// "strconv"
+	"strconv"
+	"strings"
 	. "webApp/common"
 	m "webApp/models"
 )
@@ -71,6 +72,37 @@ func (this *ArticleController) DelOne() {
 		this.Data["json"] = GetMsg(0, "删除失败")
 	}
 	this.ServeJSON()
+}
+
+/**批量删除文章
+***param ids string id用逗号分隔
+**/
+func (this *ArticleController) DelBatch() {
+	ids := this.GetString("ids")
+	if ids == "" {
+		this.Data["json"] = GetMsg(0, "参数错误")
+		this.ServeJSON()
+		return
+	}
+	_ids := strings.Split(ids, ",")
+	success := 0
+	failed := 0
+	for _, v := range _ids {
+		if id, err2 := strconv.Atoi(v); err2 == nil {
+			if err := m.DelArticle(id); err != nil {
+				failed++
+			} else {
+				success++
+			}
+		}
+	}
+	if failed == 0 {
+		this.Data["json"] = GetMsg(1, "操作成功")
+	} else {
+		this.Data["json"] = GetMsg(1, "成功删除:"+strconv.Itoa(success)+"条 删除失败:"+strconv.Itoa(failed)+"条")
+	}
+	this.ServeJSON()
+	return
 }
 
 /**获取一篇文章详情**/
