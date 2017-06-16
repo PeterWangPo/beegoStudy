@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"github.com/astaxie/beego"
+	// "github.com/astaxie/beego"
 	// "github.com/astaxie/beego/utils/pagination"
 	"fmt"
 	"strconv"
@@ -11,13 +11,13 @@ import (
 )
 
 type ArticleController struct {
-	beego.Controller
+	BaseController
 }
 
-/**ArticleController这个控制器所有方法的前置方法**/
-func (this *ArticleController) Prepare() {
-	fmt.Println("prepare done...")
-}
+/**ArticleController这个控制器所有方法的前置方法,如果没有就会查找父级是否存在该方法，存在就执行父级的该方法**/
+// func (this *ArticleController) Prepare() {
+// 	fmt.Println("prepare done...")
+// }
 func (this *ArticleController) Finish() {
 	fmt.Println("finish done...")
 }
