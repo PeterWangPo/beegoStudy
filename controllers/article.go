@@ -14,6 +14,14 @@ type ArticleController struct {
 	beego.Controller
 }
 
+/**ArticleController这个控制器所有方法的前置方法**/
+func (this *ArticleController) Prepare() {
+	fmt.Println("prepare done...")
+}
+func (this *ArticleController) Finish() {
+	fmt.Println("finish done...")
+}
+
 /**添加一条文章*/
 func (this *ArticleController) Add() {
 	// if !this.isLogin {
@@ -127,11 +135,10 @@ func (this *ArticleController) QueryArticle() {
 	if id, err := this.GetInt("id"); err == nil {
 		args["id"] = strconv.Itoa(id)
 	}
-	title := this.GetString("title")
-	if title != "" {
+	if title := this.GetString("title"); title != "" {
 		args["title"] = title
 	}
-	fmt.Println(args)
+	// fmt.Println(args)
 	articles, err := m.SearchArticle(args)
 	if err == nil {
 		this.Data["json"] = GetMsg(1, "获取成功", articles)
