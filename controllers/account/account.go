@@ -5,6 +5,7 @@ import (
 	"github.com/astaxie/beego"
 	// . "webApp/common"
 	// "html/template"
+	"strings"
 	"webApp/controllers"
 	. "webApp/models/admin"
 )
@@ -35,12 +36,14 @@ func (this *AccountController) AjaxLogin() {
 	fmt.Println(username, password)
 	// fmt.Println(password, captcha)
 	// fmt.Println(adminInfo)
-	if errMsg := adminInfo.Login(username, password, isVarified, captcha); errMsg == "" {
+	if code, Msg := adminInfo.Login(username, password, isVarified, captcha); code == 1 {
 		//登陆成功,todo...
+		userInfo := strings.Split(Msg, "|")
+		fmt.Println(userInfo)
 		this.Data["json"] = map[string]interface{}{"code": 1, "msg": "登陆成功", "url": "/"}
 	} else {
 		//登陆失败,todo...
-		this.Data["json"] = map[string]interface{}{"code": 0, "msg": errMsg}
+		this.Data["json"] = map[string]interface{}{"code": 0, "msg": Msg}
 	}
 
 	this.ServeJSON()
