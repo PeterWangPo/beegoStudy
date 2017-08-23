@@ -3,6 +3,7 @@ package routers
 import (
 	"github.com/astaxie/beego"
 	"webApp/controllers"
+	"webApp/controllers/account"
 )
 
 func init() {
@@ -13,5 +14,8 @@ func init() {
 	// beego.Router("/article/delBatch", &controllers.ArticleController{}, "post:DelBatch")
 	// beego.Router("/article/detail", &controllers.ArticleController{}, "get:Detail")
 	// beego.Router("/article/queryArticle", &controllers.ArticleController{}, "get:QueryArticle")
-	beego.Router("/account/login", &controllers.AccountController{}, "post:Login")
+
+	//用户
+	beego.Router("/account/login", &account.AccountController{}, "post:AjaxLogin")
+	beego.Router("/account/index", &account.AccountController{}, "get:Index")
 }

@@ -1,6 +1,10 @@
 package common
 
 import (
+	"crypto/md5"
+	"encoding/hex"
+	// "fmt"
+	"github.com/astaxie/beego"
 	"math/rand"
 	"time"
 )
@@ -28,21 +32,21 @@ func GenerateRandomNumber(start int, end int, count int) []int {
 	for len(nums) < count {
 		//生成随机数
 		num := r.Intn((end - start)) + start
-
-		// //查重
-		// exist := false
-		// for _, v := range nums {
-		// 	if v == num {
-		// 		exist = true
-		// 		break
-		// 	}
-		// }
-
-		// if !exist {
-		// 	nums = append(nums, num)
-		// }
 		nums = append(nums, num)
 	}
 
 	return nums
+}
+
+//md5加密
+func Common_md5(md5_string string) string {
+	md5Ctx := md5.New()
+	md5Ctx.Write([]byte(md5_string))
+	cipherStr := md5Ctx.Sum(nil)
+	return hex.EncodeToString(cipherStr)
+}
+
+//获取表名
+func Common_getTableName(table_name string) string {
+	return beego.AppConfig.String("mysqlprefix") + table_name
 }
