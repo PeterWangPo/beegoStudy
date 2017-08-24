@@ -7,5 +7,7 @@ import (
 )
 
 func main() {
+	// beego.BConfig.WebConfig.Session.SessionProvider = "file"
+	// beego.BConfig.WebConfig.Session.SessionProviderConfig = "./tmp"
 	beego.Run()
 }

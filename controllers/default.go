@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"github.com/astaxie/beego"
 )
 
@@ -27,6 +28,7 @@ func (c *LoginController) Post() {
 }
 
 func (c *MainController) Get() {
+	fmt.Println(c.GetSession("userInfo"))
 	c.Data["Website"] = beego.VERSION
 	c.Data["Email"] = "122211@123.com"
 	c.TplName = "index.tpl"

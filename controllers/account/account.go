@@ -5,7 +5,7 @@ import (
 	"github.com/astaxie/beego"
 	// . "webApp/common"
 	// "html/template"
-	"strings"
+	// "strings"
 	"webApp/controllers"
 	. "webApp/models/admin"
 )
@@ -38,8 +38,9 @@ func (this *AccountController) AjaxLogin() {
 	// fmt.Println(adminInfo)
 	if code, Msg := adminInfo.Login(username, password, isVarified, captcha); code == 1 {
 		//登陆成功,todo...
-		userInfo := strings.Split(Msg, "|")
-		fmt.Println(userInfo)
+		// userInfo := strings.Split(Msg, "|")
+		fmt.Println(">>>>>>>>>>>>>>>>>>>>", Msg)
+		this.SetSession("userInfo", Msg)
 		this.Data["json"] = map[string]interface{}{"code": 1, "msg": "登陆成功", "url": "/"}
 	} else {
 		//登陆失败,todo...
